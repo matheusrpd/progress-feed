@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@clerk/nextjs": "^6.9.3",
     "@next/env": "^15.1.1",
     "drizzle-orm": "^0.38.2",
     "next": "15.1.1",
