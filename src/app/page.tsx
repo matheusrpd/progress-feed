@@ -13,8 +13,8 @@ export default function Home() {
     try {
       await signIn.authenticateWithRedirect({
         strategy: platform === 'github' ? 'oauth_github' : 'oauth_google',
+        redirectUrl: '/auth/callback',
         redirectUrlComplete: '/feed',
-        redirectUrl: '/feed',
       })
     } catch (error) {
       console.error(error)

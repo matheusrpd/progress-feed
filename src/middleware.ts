@@ -1,12 +1,12 @@
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
 import { NextResponse } from 'next/server'
 
-const isPublicRoute = createRouteMatcher(['/', '/feed'])
+const isPublicRoute = createRouteMatcher(['/', '/auth/callback', '/feed', '/api/webhooks(.*)'])
 
 export default clerkMiddleware(async (auth, request) => {
   const { origin, pathname } = request.nextUrl
 
-  if (pathname === '/') {
+  if (pathname === '/' || pathname === '/auth/callback') {
     const { userId } = await auth()
 
     if (userId) {
