@@ -1,10 +1,33 @@
-import { SignOutButton } from '@clerk/nextjs'
+'use client'
 
-export default async function Home() {
+import { useSignIn } from '@clerk/nextjs'
+
+export default function Home() {
+  const { isLoaded, signIn } = useSignIn()
+
+  async function handleSingIn() {
+    if (!isLoaded) {
+      return
+    }
+
+    try {
+      await signIn.authenticateWithRedirect({
+        strategy: 'oauth_github',
+        redirectUrlComplete: '/feed',
+        redirectUrl: '/feed',
+      })
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  if (!isLoaded) {
+    return null
+  }
+
   return (
-    <div className="flex min-h-screen items-center justify-center">
-      <h1>Progress Feed</h1>
-      <SignOutButton />
-    </div>
+    <main className="flex h-screen w-full items-center justify-center">
+      <button onClick={handleSingIn}>Entrar com Github</button>
+    </main>
   )
 }

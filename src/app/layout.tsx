@@ -1,10 +1,9 @@
-import './globals.css'
+import '@/globals.css'
 
-import { ClerkProvider } from '@clerk/nextjs'
 import type { Metadata } from 'next'
 import { ReactNode } from 'react'
 
-import { TanstackQueryProvider } from './query-client-provider'
+import { Providers } from '@/components/providers'
 
 export const metadata: Metadata = {
   title: 'Progress Feed',
@@ -17,14 +16,12 @@ export default function RootLayout({
   children: ReactNode;
 }>) {
   return (
-    <ClerkProvider>
-      <TanstackQueryProvider>
-        <html lang="pt-BR">
-          <body className="antialiased">
-            {children}
-          </body>
-        </html>
-      </TanstackQueryProvider>
-    </ClerkProvider>
+    <Providers>
+      <html lang="pt-BR">
+        <body className="antialiased">
+          {children}
+        </body>
+      </html>
+    </Providers>
   )
 }
